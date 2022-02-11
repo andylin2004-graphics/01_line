@@ -37,26 +37,81 @@ impl Screen{
     }
 }
 fn draw_line(x0: i32, y0: i32, x1: i32, y1: i32, screen: Screen, color: ColorInfo){
-    // if x0 < x1{
-    //     let tmp = x0;
-    //     x0 = x1;
-    //     x1 = tmp;
-    //     tmp = y0;
-    //     y0 = y1;
-    //     y1 = tmp;
-    // }
-    let x = x0;
-    let y = y0;
-    let a = 2*(y1-y0);
-    let b = -2*(x1-x0);
-    let d = a + 1/2*b;
-    while x <= x1{
-        screen.plot(x, y, color);
-        if d < 0{
-            y += 1;
-            d += b;
+    if x0 < x1{
+        let tmp = x0;
+        x0 = x1;
+        x1 = tmp;
+        tmp = y0;
+        y0 = y1;
+        y1 = tmp;
+    }
+    if y0 < y1{
+        // octant 2
+        if (y1-y0)/(x1-x0) > 1{
+            let x = x0;
+            let y = y0;
+            let a = 2*(y1-y0);
+            let b = -2*(x1-x0);
+            let d = a + 1/2*b;
+            while x <= x1{
+                screen.plot(x, y, color);
+                if d < 0{
+                    y += 1;
+                    d += b;
+                }
+                x += 1;
+                d += a;
+            }
+        }else{
+            // octant 1
+            let x = x0;
+            let y = y0;
+            let a = 2*(y1-y0);
+            let b = -2*(x1-x0);
+            let d = 1/2*a + b;
+            while y <= y1{
+                screen.plot(x, y, color);
+                if d < 0{
+                    x += 1;
+                    d += a;
+                }
+                y += 1;
+                d += b;
+            }
         }
-        x += 1;
-        d += a;
+    }else{
+        //octant 7
+        if (y1-y0)/(x1-x0) > -1{
+            let x = x0;
+            let y = y0;
+            let a = 2*(y1-y0);
+            let b = -2*(x1-x0);
+            let d = a + 1/2*b;
+            while x <= x1{
+                screen.plot(x, y, color);
+                if d < 0{
+                    y -= 1;
+                    d += b;
+                }
+                x += 1;
+                d += a;
+            }
+        }else{
+            // octant 8
+            let x = x0;
+            let y = y0;
+            let a = 2*(y1-y0);
+            let b = -2*(x1-x0);
+            let d = 1/2*a + b;
+            while y <= y1{
+                screen.plot(x, y, color);
+                if d < 0{
+                    x -= 1;
+                    d += a;
+                }
+                y += 1;
+                d += b;
+            }
+        }
     }
 }
