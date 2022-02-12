@@ -137,8 +137,8 @@ impl Image{
         return result;
     }
 
-    pub fn create_file(&self){
-        let path = Path::new("../imageFile.ppm");
+    pub fn create_file(&self, fileName: String){
+        let path = Path::new(&fileName);
 
         let mut file = match File::create(&path){
             Err(error) => panic!("failed to create image file because {}", error),
