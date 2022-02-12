@@ -55,75 +55,95 @@ impl Image{
             y0 = y1;
             y1 = tmp;
         }
-        if y0 < y1{
-            // octant 1
-            if (y1-y0)/(x1-x0) <= 1{
-                println!("oct 1");
-                let mut x = x0;
-                let mut y = y0;
-                let a = 2*(y1-y0);
-                let b = -2*(x1-x0);
-                let mut d = a + 1/2*b;
-                while x <= x1{
-                    self.plot(x, y, color);
-                    if d > 0{
-                        y += 1;
-                        d += b;
-                    }
+        let slope: f32 = (y1-y0) as f32 / (x1-x0) as f32;
+        if slope > 1.0{
+            if y0 > y1{
+                let mut tmp = x0;
+                x0 = x1;
+                x1 = tmp;
+                tmp = y0;
+                y0 = y1;
+                y1 = tmp;
+            }
+            // octant 2
+            println!("oct 2");
+            let mut x = x0;
+            let mut y = y0;
+            let a = 2*(y1-y0);
+            let b = -2*(x1-x0);
+            let mut d = 1/2*a + b;
+            while y <= y1{
+                self.plot(x, y, color);
+                if d < 0{
                     x += 1;
                     d += a;
                 }
-            }else{
-                // octant 2
-                println!("oct 2");
-                let mut x = x0;
-                let mut y = y0;
-                let a = 2*(y1-y0);
-                let b = -2*(x1-x0);
-                let mut d = 1/2*a + b;
-                while y <= y1{
-                    self.plot(x, y, color);
-                    if d > 0{
-                        x += 1;
-                        d += a;
-                    }
+                y += 1;
+                d += b;
+            }
+        }else if slope >= 0.0{
+            println!("oct 1");
+            let mut x = x0;
+            let mut y = y0;
+            let a = 2*(y1-y0);
+            let b = -2*(x1-x0);
+            let mut d = a + 1/2*b;
+            while x <= x1{
+                self.plot(x, y, color);
+                if d > 0{
                     y += 1;
                     d += b;
                 }
+                x += 1;
+                d += a;
+            }
+        }else if slope < -1.0{
+            println!("oct 7");
+            // if y0 < y1{
+            //     let mut tmp = x0;
+            //     x0 = x1;
+            //     x1 = tmp;
+            //     tmp = y0;
+            //     y0 = y1;
+            //     y1 = tmp;
+            // }
+            let mut x = x0;
+            let mut y = y0;
+            let a = 2*(y1-y0);
+            let b = -2*(x1-x0);
+            let mut d = 1/2*a + b;
+            while y <= y1{
+                self.plot(x, y, color);
+                if d > 0{
+                    x += 1;
+                    d += a;
+                }
+                y -= 1;
+                d += b;
             }
         }else{
-            //octant 7
-            if (y1-y0)/(x1-x0) > -1{
-                let mut x = x0;
-                let mut y = y0;
-                let a = 2*(y1-y0);
-                let b = -2*(x1-x0);
-                let mut d = a + 1/2*b;
-                while x <= x1{
-                    self.plot(x, y, color);
-                    if d < 0{
-                        y -= 1;
-                        d += b;
-                    }
-                    x += 1;
-                    d += a;
-                }
-            }else{
-                // octant 8
-                let mut x = x0;
-                let mut y = y0;
-                let a = 2*(y1-y0);
-                let b = -2*(x1-x0);
-                let mut d = 1/2*a + b;
-                while y <= y1{
-                    self.plot(x, y, color);
-                    if d < 0{
-                        x -= 1;
-                        d += a;
-                    }
-                    y += 1;
+            println!("oct 8");
+            // if x0 > x1{
+            //     let mut tmp = x0;
+            //     x0 = x1;
+            //     x1 = tmp;
+            //     tmp = y0;
+            //     y0 = y1;
+            //     y1 = tmp;
+            // }
+            let mut x = x0;
+            let mut y = y0;
+            let a = 2*(y1-y0);
+            let b = -2*(x1-x0);
+            let mut d = a + 1/2*b;
+            while x <= x1{
+                self.plot(x, y, color);
+                if d > 0{
+                    y -= 1;
                     d += b;
                 }
+                x += 1;
+                d += a;
             }
         }
     }

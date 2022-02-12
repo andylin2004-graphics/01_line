@@ -18,9 +18,8 @@ fn main() {
     c.r = 255;
     c.g = 0;
     c.b = 0;
-    s.draw_line(0, YRES-1, XRES-1, 0, c);  
-    s.draw_line(0, YRES-1, XRES-1, YRES/2, c);
-    s.draw_line(XRES-1, 0, 0, YRES/2, c);
+    s.draw_line(0, 0, XRES/2, YRES-1, c);
+    s.draw_line(XRES-1, YRES-1, XRES/2, 0, c);
 
     s.create_file();
 }
