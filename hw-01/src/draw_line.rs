@@ -40,7 +40,7 @@ impl Screen{
 
     pub fn plot(&mut self, x: i32, y: i32, color: Color){
         if x >= 0 && y >= 0{
-            self.screen[x as usize][y as usize].plot_color(color);
+            self.screen[y as usize][x as usize].plot_color(color);
         }
     }
 
@@ -54,9 +54,9 @@ impl Screen{
             y1 = tmp;
         }
         if y0 < y1{
-            // octant 2
-            if (y1-y0)/(x1-x0) > 1{
-                println!("oct 2");
+            // octant 1
+            if (y1-y0)/(x1-x0) <= 1{
+                println!("oct 1");
                 let mut x = x0;
                 let mut y = y0;
                 let a = 2*(y1-y0);
@@ -72,8 +72,8 @@ impl Screen{
                     d += a;
                 }
             }else{
-                // octant 1
-                println!("oct 1");
+                // octant 2
+                println!("oct 2");
                 let mut x = x0;
                 let mut y = y0;
                 let a = 2*(y1-y0);
