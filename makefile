@@ -1,6 +1,6 @@
 all:
 	cargo run --manifest-path hw-01/Cargo.toml
-	imagemagick open imageFile.ppm
+	magick display imageFile.ppm
 
 art:
 	cargo run --manifest-path hw-01-art/Cargo.toml
