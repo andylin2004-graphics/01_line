@@ -5,7 +5,6 @@ mod draw_line;
 fn main() {
     let XRES: i32 = 500;
     let YRES: i32 = 500;
-    let MAX_COLOR = 255;
     let mut s = Image::new(XRES as usize, YRES as usize);
     let mut c = Color::new_color(0, 255, 0);
 
