@@ -14,6 +14,12 @@ fn main() {
     s.draw_line(0, 0, XRES-1, YRES / 2, c);
     s.draw_line(XRES -1, YRES -1, 0, YRES / 2, c);
 
+    // octants 8 and 4
+    c.b = 255;
+    s.draw_line(0, YRES-1, XRES-1, 0, c);  
+    s.draw_line(0, YRES-1, XRES-1, YRES/2, c);
+    s.draw_line(XRES-1, 0, 0, YRES/2, c);
+
     // octants 2 and 6
     c.r = 255;
     c.g = 0;
