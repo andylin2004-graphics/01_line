@@ -63,10 +63,10 @@ impl Image{
             let mut y = y0;
             let a = 2*(y1-y0);
             let b = -2*(x1-x0);
-            let mut d = 1/2*a + b;
+            let mut d = 1/2*a + b; // emphasis on controlling y
             while y <= y1{
                 self.plot(x, y, color);
-                if d < 0{
+                if d < 0{ // as b dominates a, and we need to hit 0
                     x += 1;
                     d += a;
                 }
@@ -79,10 +79,10 @@ impl Image{
             let mut y = y0;
             let a = 2*(y1-y0);
             let b = -2*(x1-x0);
-            let mut d = a + 1/2*b;
+            let mut d = a + 1/2*b; // emphasis on controlling x
             while x <= x1{
                 self.plot(x, y, color);
-                if d > 0{
+                if d > 0{ // as a dominates b, and we need to hit 0
                     y += 1;
                     d += b;
                 }
@@ -93,33 +93,33 @@ impl Image{
             println!("oct 7");
             let mut x = x0;
             let mut y = y0;
-            let a = 2*(y1-y0);
+            let a = 2*(y1-y0); // since this is negative, you dont need to make the next part negative
             let b = 2*(x1-x0);
-            let mut d = 1/2*a + b;
+            let mut d = 1/2*a + b; // emphasis on controlling x
             while y >= y1{
                 self.plot(x, y, color);
-                if d < 0{
+                if d < 0{ // as a dominates b, and we need to hit 0
                     x += 1;
-                    d -= a;
+                    d -= a; // basically adding
                 }
                 y -= 1;
-                d -= b;
+                d -= b; // basically adding
             }
         }else{
             println!("oct 8");
             let mut x = x0;
             let mut y = y0;
-            let a = 2*(y1-y0);
+            let a = 2*(y1-y0); // since this is negative, you dont need to make the next part negative
             let b = 2*(x1-x0);
-            let mut d = a + 1/2*b;
+            let mut d = a + 1/2*b; // emphasis on controlling y
             while x <= x1{
                 self.plot(x, y, color);
-                if d > 0{
+                if d > 0{ // as b dominates a, and we need to hit 0
                     y -= 1;
-                    d -= b;
+                    d -= b; // basically adding
                 }
                 x += 1;
-                d -= a;
+                d -= a; // basically adding
             }
         }
     }
