@@ -14,18 +14,18 @@ impl Color{
         Color{r: 0, g:0, b:0}
     }
 
-    pub fn newColor(r: i32, g: i32, b: i32) -> Color{
-        Color{r: r, g:g, b:b}
+    pub fn new_color(r: i32, g: i32, b: i32) -> Color{
+        Color{r: r, g: g, b: b}
     }
 
     pub fn to_string(&self) -> String{
         return format!("{} {} {}", self.r, self.g, self.b);
     }
     
-    pub fn plotColor(&mut self, newColor: Color){
-        self.r = newColor.r;
-        self.g = newColor.g;
-        self.b = newColor.b;
+    pub fn plot_color(&mut self, new_color: Color){
+        self.r = new_color.r;
+        self.g = new_color.g;
+        self.b = new_color.b;
     }
 }
 
@@ -40,12 +40,12 @@ impl Screen{
 
     pub fn plot(&mut self, x: i32, y: i32, color: Color){
         if x >= 0 && y >= 0{
-            self.screen[x as usize][y as usize].plotColor(color);
+            self.screen[x as usize][y as usize].plot_color(color);
         }
     }
 
     pub fn draw_line(&mut self, mut x0: i32, mut y0: i32, mut x1: i32, mut y1: i32, color: Color){
-        if x0 < x1{
+        if x0 > x1{
             let mut tmp = x0;
             x0 = x1;
             x1 = tmp;
@@ -56,6 +56,7 @@ impl Screen{
         if y0 < y1{
             // octant 2
             if (y1-y0)/(x1-x0) > 1{
+                println!("oct 2");
                 let mut x = x0;
                 let mut y = y0;
                 let a = 2*(y1-y0);
@@ -63,7 +64,7 @@ impl Screen{
                 let mut d = a + 1/2*b;
                 while x <= x1{
                     self.plot(x, y, color);
-                    if d < 0{
+                    if d > 0{
                         y += 1;
                         d += b;
                     }
@@ -72,6 +73,7 @@ impl Screen{
                 }
             }else{
                 // octant 1
+                println!("oct 1");
                 let mut x = x0;
                 let mut y = y0;
                 let a = 2*(y1-y0);
@@ -79,7 +81,7 @@ impl Screen{
                 let mut d = 1/2*a + b;
                 while y <= y1{
                     self.plot(x, y, color);
-                    if d < 0{
+                    if d > 0{
                         x += 1;
                         d += a;
                     }
@@ -125,7 +127,7 @@ impl Screen{
     }
 
     fn create_data(&self) -> String{
-        let mut result: String = "P3\n500 500\n255\n".to_owned();
+        let mut result: String = format!("P3\n{} {}\n255\n", self.screen.len(), self.screen[0].len());
      
         for i in 0..self.screen.len(){
             for v in 0..self.screen[i].len(){
@@ -138,7 +140,7 @@ impl Screen{
         return result;
     }
 
-    pub fn createFile(&self){
+    pub fn create_file(&self){
         let path = Path::new("imageFile.ppm");
 
         let mut file = match File::create(&path){
