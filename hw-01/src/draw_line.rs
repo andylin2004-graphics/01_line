@@ -29,18 +29,20 @@ impl Color{
     }
 }
 
-pub struct Screen{
+pub struct Image{
     pub screen: Vec<Vec<Color>>,
+    image_height: usize,
+    image_width: usize,
 }
 
-impl Screen{
-    pub fn new(x: usize, y: usize) -> Screen{
-        Screen{screen: vec![vec![Color::new(); x]; y]}
+impl Image{
+    pub fn new(image_width: usize, image_height: usize) -> Image{
+        Image{screen: vec![vec![Color::new(); image_width]; image_height], image_width: image_width, image_height: image_height}
     }
 
     pub fn plot(&mut self, x: i32, y: i32, color: Color){
         if x >= 0 && y >= 0{
-            self.screen[y as usize][x as usize].plot_color(color);
+            self.screen[(self.image_height - 1) - y as usize][x as usize].plot_color(color);
         }
     }
 
