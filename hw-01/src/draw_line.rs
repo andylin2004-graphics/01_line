@@ -58,7 +58,6 @@ impl Image{
         let slope: f32 = (y1-y0) as f32 / (x1-x0) as f32;
         if slope > 1.0{
             // octant 2
-            println!("oct 2");
             let mut x = x0;
             let mut y = y0;
             let a = 2*(y1-y0);
@@ -74,7 +73,7 @@ impl Image{
                 d += b;
             }
         }else if slope >= 0.0{
-            println!("oct 1");
+            // octant 1
             let mut x = x0;
             let mut y = y0;
             let a = 2*(y1-y0);
@@ -90,7 +89,7 @@ impl Image{
                 d += a;
             }
         }else if slope < -1.0{
-            println!("oct 7");
+            // octant 7
             let mut x = x0;
             let mut y = y0;
             let a = 2*(y1-y0); // since this is negative, you dont need to make the next part negative
@@ -106,7 +105,7 @@ impl Image{
                 d -= b; // basically adding
             }
         }else{
-            println!("oct 8");
+            // octant 8
             let mut x = x0;
             let mut y = y0;
             let a = 2*(y1-y0); // since this is negative, you dont need to make the next part negative
