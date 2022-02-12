@@ -27,5 +27,10 @@ fn main() {
     s.draw_line(0, 0, XRES/2, YRES-1, c);
     s.draw_line(XRES-1, YRES-1, XRES/2, 0, c);
 
+    // octants 7 and 3
+    c.b = 255;
+    s.draw_line(0, YRES-1, XRES/2, 0, c);
+    s.draw_line(XRES-1, 0, XRES/2, YRES-1, c);
+
     s.create_file();
 }
