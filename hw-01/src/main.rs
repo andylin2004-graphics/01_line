@@ -32,5 +32,11 @@ fn main() {
     s.draw_line(0, YRES-1, XRES/2, 0, c);
     s.draw_line(XRES-1, 0, XRES/2, YRES-1, c);
 
+    // horizontal and vertical
+    c.b = 0;
+    c.g = 255;
+    s.draw_line(0, YRES/2, XRES-1, YRES/2, c);
+    s.draw_line(XRES/2, 0, XRES/2, YRES-1, c);
+
     s.create_file();
 }
