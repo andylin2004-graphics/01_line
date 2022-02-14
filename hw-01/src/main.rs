@@ -38,4 +38,13 @@ fn main() {
     s.draw_line(XRES/2, 0, XRES/2, YRES-1, c);
 
     s.create_file("imageFile.ppm".to_owned());
+
+    s = Image::new(XRES as usize, YRES as usize);
+
+    s.draw_line(XRES/2, 0, XRES - 1, YRES/2, c);
+    s.draw_line(XRES - 1, YRES/2, XRES/2, YRES - 1, c);
+    s.draw_line(XRES/2, YRES - 1, 0, YRES/2, c);
+    s.draw_line(0, YRES/2, XRES/2, 0, c);
+
+    s.create_file("rickRoll.ppm".to_owned());
 }
