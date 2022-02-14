@@ -1,6 +1,7 @@
 use std::fs::File;
 use std::io::prelude::*;
 use std::path::Path;
+use std::fmt;
 
 #[derive(Copy, Clone)]
 pub struct Color{
@@ -17,15 +18,17 @@ impl Color{
     pub fn new_color(r: i32, g: i32, b: i32) -> Color{
         Color{r: r, g: g, b: b}
     }
-
-    pub fn to_string(&self) -> String{
-        return format!("{} {} {}", self.r, self.g, self.b);
-    }
     
     pub fn plot_color(&mut self, new_color: Color){
         self.r = new_color.r;
         self.g = new_color.g;
         self.b = new_color.b;
+    }
+}
+
+impl fmt::Display for Color{
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result{
+        write!(f, "{} {} {}", self.r, self.g, self.b)
     }
 }
 
