@@ -69,5 +69,5 @@ fn main() {
     s = Image::new(XRES as usize, YRES as usize);
 
     s.square_portal(XRES, YRES, 0, 0, c);
-    s.create_file("rickRoll.ppm".to_owned());
+    s.create_file("arts.ppm".to_owned());
 }
