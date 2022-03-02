@@ -127,7 +127,7 @@ impl Image{
     }
 
     fn create_data(&self) -> String{
-        let mut result: String = format!("P3\n{} {}\n255\n", self.screen.len(), self.screen[0].len());
+        let mut result: String = format!("P3\n{} {}\n255\n", self.screen[0].len(), self.screen.len());
      
         for i in 0..self.screen.len(){
             for v in 0..self.screen[i].len(){
